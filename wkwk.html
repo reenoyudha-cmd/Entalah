@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untuk Ezra</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script:wght@700&display=swap');
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+        }
+
+        .bg {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* --- HALAMAN 1 --- */
+        #page1 {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .box-title {
+            background-color: white;
+            padding: 20px 50px;
+            border-radius: 20px; /* Persegi panjang sudut tumpul */
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+
+        .box-title h1 {
+            margin: 0;
+            color: #1e3a8a;
+            font-size: 1.8rem;
+        }
+
+        .next-btn {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            font-weight: 600;
+            border-bottom: 2px solid white;
+            padding-bottom: 5px;
+            transition: 0.3s;
+        }
+
+        /* --- HALAMAN 2 --- */
+        #page2 {
+            display: none;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .letter-container {
+            position: relative;
+            width: 300px;
+            height: 200px;
+        }
+
+        .envelope {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #cbd5e1;
+            border-radius: 5px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Penutup Amplop Atas */
+        .envelope::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-top: 100px solid #94a3b8;
+            z-index: 2;
+        }
+
+        /* Tombol Merah */
+        .red-btn {
+            width: 55px;
+            height: 55px;
+            background-color: #ef4444;
+            border-radius: 50%;
+            z-index: 10;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            border: 3px solid #b91c1c;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: 10px;
+            animation: pulse 1.5s infinite;
+        }
+
+        /* KERTAS SURAT (Fixed menimpa semua) */
+        .paper {
+            display: none; /* Sembunyi sampai tombol diklik */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 85vw;
+            max-width: 500px;
+            background: white;
+            padding: 30px;
+            z-index: 100;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border-radius: 10px;
+            box-sizing: border-box;
+            max-height: 85vh;
+            overflow-y: auto;
+            animation: slideUp 0.8s ease-out forwards;
+        }
+
+        .paper h2 {
+            font-family: 'Dancing Script', cursive;
+            color: #1e3a8a;
+            margin: 0 0 15px 0;
+            font-size: 2.2rem;
+        }
+
+        .paper p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #333;
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        /* Animasi */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        @keyframes slideUp {
+            from { transform: translate(-50%, 0%); opacity: 0; }
+            to { transform: translate(-50%, -50%); opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg">
+        <!-- Halaman 1 -->
+        <div id="page1">
+            <div class="box-title">
+                <h1>Untuk Ezra</h1>
+            </div>
+            <div class="next-btn" onclick="goToPage2()">next</div>
+        </div>
+
+        <!-- Halaman 2 -->
+        <div id="page2">
+            <div class="letter-container" id="containerSurat">
+                <div class="envelope">
+                    <div class="red-btn" onclick="openLetter()">KLIK</div>
+                </div>
+            </div>
+
+            <!-- Kertas yang menimpa -->
+            <div class="paper" id="paperSurat">
+                <h2>Haloo Ezra</h2>
+                <p>
+                    Dah engga kerasa ya 3 tahun berjalan begitu cepat dan pada hari ini semuanya akan berpisah, 
+                    aku mau ngucapin Happy Graduation yaa buat kamu <b>Ezra Fabian Wahono</b>, 
+                    Terimakasih karena sudah mau jadi temanku selama 3 tahun ini dari kelas 7C kita sebangku terus, 
+                    kemudian kelas 8 kita belajar agama satu ruangan dan juga kelas 9 ini kamu dapet posisi ketua kelas kwkwkwkwk, 
+                    mungkin segitu aja kata kata dari aku dan semoga kita satu sma ya.
+                </p>
+                <p style="text-align: right; font-weight: bold; color: #1e3a8a; margin-top: 20px;">- Temanmu</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function goToPage2() {
+            document.getElementById('page1').style.display = 'none';
+            document.getElementById('page2').style.display = 'flex';
+        }
+
+        function openLetter() {
+            // Langsung tampilkan kertas menimpa amplop
+            document.getElementById('paperSurat').style.display = 'block';
+            // Sembunyikan container amplop di belakangnya agar rapi
+            document.getElementById('containerSurat').style.opacity = '0.3';
+        }
+    </script>
+
+</body>
+</html>
