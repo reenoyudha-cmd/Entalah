@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untuk Ezra</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script:wght@700&display=swap');
+
+        * { box-sizing: border-box; }
+        body, html {
+            margin: 0; padding: 0;
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            background-color: #2e1065;
+        }
+
+        .container {
+            background: linear-gradient(135deg, #581c87, #2e1065);
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* --- HALAMAN 1 --- */
+        #page1 {
+            text-align: center;
+            z-index: 10;
+            transition: all 0.8s ease-in-out;
+        }
+        .box-title {
+            background-color: white;
+            padding: 25px 60px;
+            border-radius: 20px; /* Sudut Tumpul */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            margin-bottom: 40px;
+        }
+        .box-title h1 { margin: 0; color: #581c87; font-size: 2.5rem; }
+        .btn-next {
+            color: white;
+            text-decoration: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            font-weight: 600;
+            border-bottom: 2px solid white;
+            padding-bottom: 5px;
+            transition: 0.3s;
+        }
+        .btn-next:hover { letter-spacing: 5px; }
+
+        /* --- HALAMAN 2 --- */
+        #page2 {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+        .envelope-wrapper {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            cursor: pointer;
+        }
+        .envelope {
+            position: absolute;
+            width: 100%; height: 100%;
+            background: #d8b4fe;
+            border-radius: 8px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+            display: flex; justify-content: center; align-items: center;
+        }
+        .envelope::before {
+            content: ''; position: absolute; top: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-top: 100px solid #a855f7;
+            z-index: 2;
+        }
+        .red-dot {
+            width: 60px; height: 60px;
+            background-color: #dc2626;
+            border-radius: 50%;
+            z-index: 10;
+            border: 4px solid #991b1b;
+            animation: pulse 1.5s infinite;
+        }
+
+        /* KERTAS SURAT */
+        .letter {
+            display: none;
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 85vw; max-width: 500px;
+            background: #fffdfa;
+            padding: 35px;
+            z-index: 100;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.7);
+            border-radius: 12px;
+            max-height: 85vh;
+            overflow-y: auto;
+            animation: paperIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+        .letter h2 { font-family: 'Dancing Script', cursive; color: #581c87; }
+        .letter p { font-size: 1.05rem; line-height: 1.7; color: #333; }
+        .btn-page3 {
+            display: block; margin: 25px auto 0;
+            background: #581c87; color: white;
+            padding: 12px 35px; border-radius: 25px;
+            border: none; cursor: pointer; font-weight: bold;
+        }
+
+        /* --- HALAMAN 3 --- */
+        #page3 {
+            display: none;
+            width: 90%; max-width: 900px;
+            justify-content: center; align-items: center;
+            gap: 40px;
+        }
+        .photo-frame {
+            border: 15px solid white;
+            background: white;
+            box-shadow: 0 20px 45px rgba(0,0,0,0.6);
+            transform: rotate(-3deg);
+            flex-shrink: 0;
+        }
+        .photo-frame img { width: 300px; height: auto; display: block; }
+        .grad-title {
+            color: white; font-size: 4rem;
+            font-family: 'Dancing Script', cursive;
+            text-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+        }
+
+        /* --- ANIMASI --- */
+        @keyframes paperIn {
+            from { transform: translate(-50%, 20%); opacity: 0; }
+            to { transform: translate(-50%, -50%); opacity: 1; }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
+            70% { transform: scale(1.1); box-shadow: 0 0 0 15px rgba(220, 38, 38, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+        }
+        .fade-out { opacity: 0; transform: scale(0.9); }
+
+        @media (max-width: 768px) {
+            #page3 { flex-direction: column; text-align: center; }
+            .grad-title { font-size: 2.5rem; }
+            .photo-frame img { width: 220px; }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="bgMusic" loop>
+        <source src="Paradise.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+        
+        <div id="page1">
+            <div class="box-title">
+                <h1>Untuk Ezra</h1>
+            </div>
+            <div class="btn-next" onclick="startJourney()">next</div>
+        </div>
+
+        <div id="page2">
+            <div class="envelope-wrapper" onclick="openLetter()">
+                <div class="envelope">
+                    <div class="red-dot"></div>
+                </div>
+            </div>
+            
+            <div class="letter" id="letterNode">
+                <h2>Haloo Ezra</h2>
+                <p>
+                    Dah engga kerasa ya 3 tahun berjalan begitu cepat dan pada hari ini semuanya akan berpisah, 
+                    aku mau ngucapin Happy Graduation yaa buat kamu <b>Ezra Fabian Wahono</b>, 
+                    Terimakasih karena sudah mau jadi temanku selama 3 tahun ini dari kelas 7C kita sebangku terus, 
+                    kemudian kelas 8 kita belajar agama satu ruangan dan juga kelas 9 ini kamu dapet posisi ketua kelas kwkwkwkwk, 
+                    mungkin segitu aja kata kata dari aku dan semoga kita satu sma ya.
+                </p>
+                <button class="btn-page3" onclick="toFinalPage()">next</button>
+            </div>
+        </div>
+
+        <div id="page3">
+            <div class="photo-frame">
+                <img src="Ezra.jpeg" alt="Foto Ezra">
+            </div>
+            <h1 class="grad-title">Happy Graduation!</h1>
+        </div>
+
+    </div>
+
+    <script>
+        const audio = document.getElementById('bgMusic');
+
+        function startJourney() {
+            // Memulai musik
+            audio.play().catch(e => console.log("Autoplay dicegah browser, musik akan menyala"));
+            
+            // Efek transisi
+            document.getElementById('page1').classList.add('fade-out');
+            setTimeout(() => {
+                document.getElementById('page1').style.display = 'none';
+                document.getElementById('page2').style.display = 'flex';
+            }, 800);
+        }
+
+        function openLetter() {
+            document.getElementById('letterNode').style.display = 'block';
+        }
+
+        function toFinalPage() {
+            document.getElementById('page2').classList.add('fade-out');
+            setTimeout(() => {
+                document.getElementById('page2').style.display = 'none';
+                document.getElementById('page3').style.display = 'flex';
+                document.getElementById('page3').style.animation = 'fadeIn 1.2s forwards';
+            }, 800);
+        }
+    </script>
+</body>
+</html>
