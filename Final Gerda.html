@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untuk Gerda</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --accent-color: #e63946;
+            --text-color: #ffffff;
+            --glass: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background: radial-gradient(circle, #1a1a1a 0%, #000000 100%);
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Navigasi Halaman */
+        .page {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .active {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Tombol Next */
+        .btn-next {
+            background: white;
+            color: black;
+            border: none;
+            padding: 12px 45px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 30px;
+            box-shadow: 0 5px 15px rgba(255,255,255,0.1);
+        }
+
+        .btn-next:hover {
+            transform: scale(1.05);
+            background: var(--accent-color);
+            color: white;
+        }
+
+        /* PAGE 1 */
+        .banner {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            padding: 30px 60px;
+            border-radius: 0 0 30px 30px; /* Sudut tumpul di bawah */
+            border: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            letter-spacing: 2px;
+        }
+
+        /* PAGE 2 - SURAT */
+        .envelope {
+            width: 280px;
+            height: 180px;
+            background: #f0f0f0;
+            border-radius: 8px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .red-dot {
+            width: 50px;
+            height: 50px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            border: 4px solid #9b2226;
+            z-index: 5;
+        }
+
+        #letterOverlay {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 85%;
+            max-width: 500px;
+            background: white;
+            color: #1a1a1a;
+            padding: 40px;
+            border-radius: 5px;
+            box-shadow: 0 0 100px rgba(0,0,0,0.9);
+            z-index: 100;
+            text-align: left;
+            animation: stampIn 0.5s ease-out forwards;
+        }
+
+        @keyframes stampIn {
+            from { transform: translate(-50%, 0%) scale(1.2); opacity: 0; }
+            to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+
+        #letterOverlay h2 {
+            font-family: 'Dancing Script', cursive;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            font-size: 2.2rem;
+        }
+
+        /* PAGE 3 */
+        .final-layout {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            background: rgba(255,255,255,0.05);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .photo-frame {
+            border: 12px solid white;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.7);
+            transform: rotate(-3deg);
+            max-width: 300px;
+            transition: 0.5s;
+        }
+
+        .photo-frame img {
+            width: 100%;
+            display: block;
+        }
+
+        .grad-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(255,255,255,0.3);
+        }
+
+        @media (max-width: 768px) {
+            .final-layout { flex-direction: column; text-align: center; }
+            .grad-text { font-size: 2.8rem; }
+            h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="bgMusic" loop>
+        <source src="Perunggu - 33x (Video Lirik).mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+        <div id="p1" class="page active">
+            <div class="banner">
+                <h1>Untuk Gerda</h1>
+            </div>
+            <button class="btn-next" onclick="startExperience()">Next</button>
+        </div>
+
+        <div id="p2" class="page">
+            <div class="envelope" onclick="openSurat()">
+                <div class="red-dot"></div>
+            </div>
+            <p style="margin-top: 20px; color: #888;">Klik tombol merah pada surat</p>
+
+            <div id="letterOverlay">
+                <h2>Halo Gerda,</h2>
+                <p>
+                    Gak kerasa kita udah temenan selama 3 tahun ya. Aku mau ngucapin 
+                    <strong>Happy Graduation yaa!</strong> Berterima kasih banget udah mau jadi temenku 
+                    dan 2 tahun kita sekelas. Semoga kita ketemu lagi yaa.
+                </p>
+                <button class="btn-next" style="width: 100%; border: 1px solid #ddd;" onclick="toFinal()">Next</button>
+            </div>
+        </div>
+
+        <div id="p3" class="page">
+            <div class="final-layout">
+                <div class="photo-frame">
+                    <img src="Gerda.png.jpeg" alt="Foto Gerda">
+                </div>
+                <h1 class="grad-text">Happy Graduation</h1>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const audio = document.getElementById('bgMusic');
+
+        function startExperience() {
+            // Putar musik (Volume 100%)
+            audio.volume = 1.0;
+            audio.play().catch(e => console.log("Musik butuh interaksi user"));
+            
+            showPage('p1', 'p2');
+        }
+
+        function openSurat() {
+            document.getElementById('letterOverlay').style.display = 'block';
+        }
+
+        function toFinal() {
+            document.getElementById('letterOverlay').style.display = 'none';
+            showPage('p2', 'p3');
+        }
+
+        function showPage(oldId, newId) {
+            document.getElementById(oldId).classList.remove('active');
+            setTimeout(() => {
+                document.getElementById(newId).classList.add('active');
+            }, 100);
+        }
+    </script>
+</body>
+</html>

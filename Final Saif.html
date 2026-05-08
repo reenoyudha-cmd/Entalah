@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untuk Saif</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --hitam-gelap: #0d0d0c;
+            --hitam-elegan: #1a1a1a;
+            --merah-neon: #ff003c;
+            --abu-terang: #f4f4f4;
+            --putih-transparan: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: radial-gradient(circle, var(--hitam-elegan) 0%, var(--hitam-gelap) 100%);
+            font-family: 'Poppins', sans-serif;
+            color: #ffffff;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Navigasi Halaman */
+        .page {
+            display: none;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .active {
+            display: flex;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Tombol Next Umum */
+        .btn-next {
+            background: linear-gradient(45deg, var(--merah-neon), #ff4d00);
+            color: white;
+            border: none;
+            padding: 14px 50px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(255, 0, 60, 0.4);
+            margin-top: 25px;
+            text-transform: uppercase;
+        }
+
+        .btn-next:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(255, 0, 60, 0.7);
+            background: linear-gradient(45deg, #ff4d00, var(--merah-neon));
+        }
+
+        /* PAGE 1 - UNTUK SAIF */
+        .title-box {
+            background: var(--putih-transparan);
+            backdrop-filter: blur(12px);
+            padding: 40px 70px;
+            border-radius: 0 0 30px 30px; /* Sudut tumpul di bawah */
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            margin-bottom: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+        }
+
+        .title-box h1 {
+            font-size: 3.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 0px 5px 15px rgba(255, 255, 255, 0.1);
+        }
+
+        /* PAGE 2 - SURAT DENGAN TOMBOL MERAH */
+        .envelope {
+            width: 320px;
+            height: 200px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+            transition: transform 0.3s ease;
+            border: 2px solid #ccc;
+        }
+
+        .envelope:hover {
+            transform: translateY(-5px);
+        }
+
+        .red-dot {
+            width: 60px;
+            height: 60px;
+            background: var(--merah-neon);
+            border-radius: 50%;
+            border: 5px solid #990024;
+            z-index: 5;
+            box-shadow: 0 0 20px rgba(255, 0, 60, 0.6);
+            transition: transform 0.2s;
+        }
+
+        .red-dot:active {
+            transform: scale(0.85);
+        }
+
+        /* KERTAS SURAT (POP UP MENIMPA) */
+        .letter-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 85%;
+            max-width: 520px;
+            background: #ffffff;
+            color: #1a1a1a;
+            padding: 45px;
+            border-radius: 5px;
+            box-shadow: 0 0 150px rgba(0, 0, 0, 0.95), 0 0 50px rgba(255, 0, 60, 0.2);
+            z-index: 100;
+            text-align: left;
+            animation: stampOverlay 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        }
+
+        @keyframes stampOverlay {
+            0% {
+                transform: translate(-50%, -50%) scale(1.5);
+                opacity: 0;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .letter-popup h2 {
+            font-family: 'Dancing Script', cursive;
+            color: var(--merah-neon);
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .letter-popup p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #2b2b2b;
+            margin-bottom: 25px;
+        }
+
+        /* PAGE 3 - HASIL AKHIR */
+        .split-layout {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 50px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 50px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+        }
+
+        .polaroid-frame {
+            border: 15px solid white;
+            border-bottom: 45px solid white;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+            transform: rotate(-4deg);
+            max-width: 310px;
+            transition: all 0.5s ease;
+        }
+
+        .polaroid-frame img {
+            width: 100%;
+            display: block;
+        }
+
+        .polaroid-frame:hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+
+        .grad-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4.5rem;
+            color: #ffffff;
+            text-shadow: 0px 0px 20px rgba(255, 0, 60, 0.8);
+            letter-spacing: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .split-layout {
+                flex-direction: column;
+                gap: 30px;
+                padding: 30px;
+            }
+            .grad-text {
+                font-size: 3rem;
+            }
+            .title-box h1 {
+                font-size: 2.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="backgroundAudio" loop>
+        <source src="Gorillaz - Feel Good Inc. (Official Video).mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+        <div id="p1" class="page active">
+            <div class="title-box">
+                <h1>Untuk Saif</h1>
+            </div>
+            <button class="btn-next" onclick="nextToPage2()">Next</button>
+        </div>
+
+        <div id="p2" class="page">
+            <div class="envelope" onclick="openLetterOverlay()">
+                <div class="red-dot"></div>
+            </div>
+            <p style="margin-top: 25px; color: #888; font-style: italic;">Ketuk tombol merah di tengah surat</p>
+
+            <div id="surat" class="letter-popup">
+                <h2>Halo Saif,</h2>
+                <p>
+                    gak kerasa kita udah temenan selama 3 tahun ya. Aku mau ngucapin 
+                    <strong>Happy Graduation yaa!</strong> Berterima kasih banget udah mau jadi temenku 
+                    mulai dari game fnaf dan kelas ini kita sekelas. Semoga kita ketemu lagi yaa.
+                </p>
+                <button class="btn-next" style="width: 100%; margin-top: 10px;" onclick="nextToPage3()">Next</button>
+            </div>
+        </div>
+
+        <div id="p3" class="page">
+            <div class="split-layout">
+                <div class="polaroid-frame">
+                    <img src="Zean.jpg" alt="Foto Saif">
+                </div>
+                <div class="grad-text">Happy Graduation</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const music = document.getElementById('backgroundAudio');
+
+        function nextToPage2() {
+            // Putar audio dengan volume 100% setelah interaksi pertama
+            music.volume = 1.0;
+            music.play().catch(err => console.log("Autoplay dicegah oleh pengaturan browser Anda."));
+            
+            transition('p1', 'p2');
+        }
+
+        function openLetterOverlay() {
+            const letter = document.getElementById('surat');
+            letter.style.display = 'block';
+        }
+
+        function nextToPage3() {
+            document.getElementById('surat').style.display = 'none';
+            transition('p2', 'p3');
+        }
+
+        function transition(idHide, idShow) {
+            const hidePage = document.getElementById(idHide);
+            const showPage = document.getElementById(idShow);
+            
+            hidePage.classList.remove('active');
+            setTimeout(() => {
+                showPage.classList.add('active');
+            }, 100);
+        }
+    </script>
+</body>
+</html>
