@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untuk Chiselya</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --biru-dasar: #003366;
+            --biru-muda: #00509d;
+            --font-latin: 'Great Vibes', cursive;
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            height: 100%; width: 100%;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--biru-dasar);
+            color: white;
+            overflow: hidden;
+        }
+
+        /* Latar Belakang Giyu Imut Tersebar */
+        .giyu-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-content: space-around;
+            pointer-events: none;
+            opacity: 0.15;
+        }
+
+        .giyu-overlay img {
+            width: 120px;
+            margin: 20px;
+            transform: rotate(10deg);
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            width: 100%; height: 100%;
+        }
+
+        .page {
+            position: absolute;
+            width: 100%; height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.8s ease-in-out;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* --- HALAMAN 1 --- */
+        .box-for {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px 60px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            margin-bottom: 30px;
+        }
+
+        .box-for h1 {
+            font-family: var(--font-latin);
+            color: var(--biru-dasar);
+            font-size: 4rem;
+            margin: 0;
+        }
+
+        .btn-next {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 77, 77, 0.4);
+            transition: 0.3s;
+        }
+
+        .btn-next:hover { transform: scale(1.1); background-color: #ff3333; }
+
+        /* --- HALAMAN 2 --- */
+        #page2 { transform: translateY(100%); opacity: 0; }
+        
+        .envelope {
+            width: 250px; height: 180px;
+            background: #f1f2f6;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .red-button {
+            width: 60px; height: 60px;
+            background: #d63031;
+            border-radius: 50%;
+            border: 4px solid white;
+            cursor: pointer;
+            z-index: 10;
+            box-shadow: 0 0 15px rgba(214, 48, 49, 0.6);
+        }
+
+        .letter-content {
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 85%; max-width: 600px;
+            background: white;
+            color: #333;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+            z-index: 20;
+            transition: 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .letter-content.show { transform: translate(-50%, -50%) scale(1); }
+        .latin-text { font-family: var(--font-latin); font-size: 3rem; color: var(--biru-dasar); }
+
+        /* --- HALAMAN 3 --- */
+        #page3 { transform: translateY(100%); opacity: 0; }
+        
+        .layout-grad {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            width: 90%;
+            justify-content: center;
+        }
+
+        .frame-photo {
+            background: white;
+            padding: 15px;
+            border: 1px solid #ddd;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            transform: rotate(-3deg);
+            max-width: 350px;
+        }
+
+        .frame-photo img { width: 100%; display: block; }
+        .grad-title { font-family: var(--font-latin); font-size: 5rem; text-shadow: 3px 3px 10px rgba(0,0,0,0.5); }
+
+        /* Animasi Transisi */
+        .page-active { transform: translateY(0) !important; opacity: 1 !important; }
+        .page-exit { transform: translateY(-100%) !important; opacity: 0 !important; }
+
+        @media (max-width: 768px) {
+            .layout-grad { flex-direction: column; text-align: center; }
+            .grad-title { font-size: 3rem; }
+            .box-for h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="giyu-overlay" id="giyuBG"></div>
+
+    <audio id="bgMusic" loop>
+        <source src="Multo by Cup of Joe #music #lyrics #opm.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+        <div id="page1" class="page">
+            <div class="box-for">
+                <h1>For Chiselya</h1>
+            </div>
+            <button class="btn-next" onclick="startApp()">Next</button>
+        </div>
+
+        <div id="page2" class="page">
+            <div class="envelope">
+                <div class="red-button" onclick="openLetter()"></div>
+            </div>
+
+            <div id="letterPaper" class="letter-content">
+                <h2 class="latin-text">Haloo chisel</h2>
+                <p>Dah lama ya kita temenan dari kelas 8 sampai kelas 9 ini, aku mau ngucapin Happy Graduation yaa semoga kamu sukses dan terima kasih juga atas bantuan bantuan yang kamu berikan, perjalanan selama smp ternyata penuh dengan suka dan duka ya, mulai dari p5 terus kegiatan osis yang kamu programkan dan juga berbagai event yang diselenggarakan.</p>
+                <p>sebelumnya aku mau minta maaf kalo selama ini aku punya banyak salah ke kamu. Aku minta maaf karena mungkin tiba-tiba ngilang, slow respon, dan juga lain sebagainya. Aku minta Maaf banget. Tapi semoga kesalahan itu tidak terulang lagi ya. Mungkin segitu aja kata kata-kata, maaf mungkin ada kata-kata yang kurang berkenan atau terlalu alay dan semoga kita bisa ketemu di lain waktu yaa</p>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="btn-next" onclick="goPage3()">Next</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="page3" class="page">
+            <div class="layout-grad">
+                <div class="frame-photo">
+                    <img src="Chisel.jpeg" alt="Foto Chisel">
+                </div>
+                <div class="grad-title">Happy Graduation</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const music = document.getElementById('bgMusic');
+
+        function createGiyuBG() {
+            const bg = document.getElementById('giyuBG');
+            for (let i = 0; i < 15; i++) {
+                const img = document.createElement('img');
+                img.src = 'giyu.png';
+                bg.appendChild(img);
+            }
+        }
+
+        function startApp() {
+            // Set Volume ke 100% dan putar lagu dari awal
+            music.volume = 1.0; 
+            music.currentTime = 0; 
+            music.play().catch(error => {
+                console.log("Autoplay dicegah oleh browser, pastikan ada interaksi user.");
+            });
+
+            document.getElementById('page1').classList.add('page-exit');
+            document.getElementById('page2').classList.add('page-active');
+        }
+
+        function openLetter() {
+            document.getElementById('letterPaper').classList.add('show');
+        }
+
+        function goPage3() {
+            document.getElementById('page2').classList.add('page-exit');
+            document.getElementById('page3').classList.add('page-active');
+        }
+
+        window.onload = createGiyuBG;
+    </script>
+</body>
+</html>
